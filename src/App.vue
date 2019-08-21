@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" ref="bodyPage">
+    <transition name="fade" mode="out-in">
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </transition>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data:function(){
+    return {
+      clientHeight:''
+    }
+  },
+  mounted:function(){
+    this.clientHeight = `${document.documentElement.clientHeight}`
+    this.$refs.bodyPage.style.height = this.clientHeight + 'px'
   }
 }
 </script>
 
 <style>
-#app {
+  html,body{
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+  }
+  #app{
+    width: 100%;
+  }
+/*#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
+}*/
 </style>
