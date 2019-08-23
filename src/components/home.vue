@@ -5,16 +5,25 @@
 				<p>{{count}}, {{isLogin}}</p>
 			</div>
 			<div class="buttomDiv">
-				<Button type="primary" class="loginButton" @click="showLoginModal">Login</Button>
+				<Button type="primary" class="loginButton" style="margin-right:20px" @click="showLoginModal">Login</Button>
+				<Button type="primary" class="loginButton" @click="showRegisterModal">Register</Button>
 			</div>
 		</div>
 
-		<Button type="primary" class="navigator" @click="navigator">Login</Button>
+		<Button type="primary" class="navigator" @click="navigator">navigater</Button>
 		
-		<Modal v-model="loginModalStatus" @on-ok="loginEvent">
+		<Modal v-model="registerModalStatus" @on-ok="registerEvent">
+			<p>Register</p>
 			<Input v-model="username" placeholder="Username" style="width: 300px" />
 			<Input v-model="password" placeholder="Password" style="width: 300px" />
 		</Modal>
+
+		<Modal v-model="loginModalStatus" @on-ok="loginEvent">
+			<p>Login</p>
+			<Input v-model="username" placeholder="Username" style="width: 300px" />
+			<Input v-model="password" placeholder="Password" style="width: 300px" />
+		</Modal>
+
 	</div>
 </template>
 
@@ -28,6 +37,7 @@
 		data:function(){
 			return {
 				loginModalStatus:false,
+				registerModalStatus:false,
 				username:'',
 				password:'',
 				tempLoginStatus:'No Login'
@@ -40,6 +50,13 @@
 					'isLogin',
 				]),
 		},
+		// computed:mapState({
+		// 	count: state => state.count
+		// 	countAlias:'count',
+		// 	countPlusLocalState(state){
+		// 		return state.count + this.localCount
+		// 	}
+		// }),
 		created(){
 			this.incrementStep();
 		},
@@ -47,8 +64,23 @@
 			...mapActions([
 				'incrementStep'
 			]),
+			showRegisterModal:function(){
+				this.registerModalStatus = true;
+			},
 			showLoginModal:function(){
 				this.loginModalStatus = true;
+			},
+			registerEvent:function(){
+				axios.post('http://127.0.0.1:5000/register',{
+					username:this.username,
+					password:this.password,
+					})
+				.then(function(res){
+
+				})
+				.catch(function(error){
+
+				})
 			},
 			loginEvent:function(){
 				// console.log(this.username);
@@ -63,11 +95,11 @@
 				// 	})
 
 				axios.post('http://127.0.0.1:5000/login',{
-							um:this.username,
-							pw:this.password,
+							username:this.username,
+							password:this.password,
 						})
 					.then(function(response){
-						console.log(response.status)
+						console.log(response)
 						if(response.status != 200){
 							// this.$Message.error(response.data)
 						}

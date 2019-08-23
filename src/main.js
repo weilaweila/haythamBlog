@@ -7,6 +7,7 @@ import 'iview/dist/styles/iview.css';
 import axios from 'axios';
 import vueAxios from 'vue-axios';
 import store from './store';
+import Vuex from 'vuex'
 
 Vue.config.productionTip = false
 
@@ -17,31 +18,31 @@ Vue.use(Vuex)
 
 router.beforeEach((to,from,next)=>{
 	let getFlag = localStorage.getItem("Flag");
-	console.log(getFlag)
-	if(getFlag === "isLogin"){
+	// console.log(getFlag)
+	// if(getFlag === "isLogin"){
 
-		store.state.isLogin = true
-		next()
-		// if(!to.meta.isLogin){
-		// 	iView.Message.error("login please 1")
-		// 	next({
-		// 		path:'/article'
-		// 	})
-		// }
+	// 	store.state.isLogin = true
+	// 	next()
+	// 	// if(!to.meta.isLogin){
+	// 	// 	iView.Message.error("login please 1")
+	// 	// 	next({
+	// 	// 		path:'/article'
+	// 	// 	})
+	// 	// }
 
-	}else{
-		console.log("to:", to.meta.isLogin)
-		if(to.meta.isLogin){
-			// next({
-			// 	path:'/',
-			// })
-			iView.Message.info("login please 2")
-		}else{
-			next()
-		}
-	}
+	// }else{
+	// 	console.log("to:", to.meta.isLogin)
+	// 	if(to.meta.isLogin){
+	// 		// next({
+	// 		// 	path:'/',
+	// 		// })
+	// 		iView.Message.info("login please 2")
+	// 	}else{
+	// 		next()
+	// 	}
+	// }
 	// console.log("here is beforeEach")
-	// next()
+	next()
 })
 
 router.afterEach(route=>{

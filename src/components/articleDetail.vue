@@ -1,6 +1,6 @@
 <template>
 	<div class="super">
-		1111111222
+		Article: {{article}}
 		<Button type="primary" @click="logout">logout</Button>
 	</div>
 </template>
@@ -13,7 +13,7 @@
 		name: 'articleDetail',
 		data:function(){
 			return {
-
+				article:'default',
 			}
 		},
 		methods:{
@@ -23,6 +23,18 @@
 				localStorage.removeItem("Flag","isLogin")
 			}
 		},
+		created:function(){
+			var that = this
+			// var temp = ''
+			axios.get('http://127.0.0.1:5000/article')
+				.then(function(res){
+					that.article = res.data
+				})
+				.catch(function(error){
+
+				})
+			// this.article = temp
+		}
 	}
 </script>
 
