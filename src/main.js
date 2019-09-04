@@ -18,7 +18,7 @@ Vue.use(Vuex)
 
 router.beforeEach((to,from,next)=>{
 	let getFlag = localStorage.getItem("Flag");
-	// console.log(getFlag)
+	console.log(getFlag)
 	// if(getFlag === "isLogin"){
 
 	// 	store.state.isLogin = true
