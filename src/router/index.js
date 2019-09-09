@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-Vue.use(Router)
 
 import home from '../components/home.vue'
 import articleDetail from '../components/articleDetail'
 
+Vue.use(Router)
 export default new Router({
 	mode:'history',
 	routes:[
 		{
 			path:'/',
 			component:home,
+			name:'home',
 			meta:{
 				isLogin:false
 			}
@@ -18,8 +19,9 @@ export default new Router({
 		{
 			path:'/article',
 			component:articleDetail,
+			name:'article',
 			meta:{
-				isLogin:true
+				isLogin:false
 			}
 		},
 	]

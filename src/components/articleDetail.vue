@@ -19,13 +19,17 @@
 		methods:{
 			logout:function(){
 				this.$router.push("/")
-				store.dispatch("userLogin",false)
-				localStorage.removeItem("Flag","isLogin")
+				// store.dispatch("userLogin",false)
+				// localStorage.removeItem("Flag","isLogin")
+				localStorage.removeItem("Authorization","")
+				let token = localStorage.getItem('Authorization');
+				console.log(token)
 			}
 		},
 		created:function(){
 			var that = this
 			// var temp = ''
+
 			axios.get('http://127.0.0.1:5000/article')
 				.then(function(res){
 					that.article = res.data
