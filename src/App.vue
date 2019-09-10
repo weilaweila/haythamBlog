@@ -20,6 +20,7 @@ export default {
   mounted:function(){
     this.clientHeight = `${document.documentElement.clientHeight}`
     this.$refs.bodyPage.style.height = this.clientHeight + 'px'
+    console.log(this.$refs.bodyPage.style.height)
   }
 }
 </script>

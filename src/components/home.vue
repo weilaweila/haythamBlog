@@ -1,24 +1,43 @@
 <template>
 	<div class="super">
 		<div class="header">
-			<div class="logoDiv">
+<!-- 			<div class="logoDiv">
 				<p>{{count}}, {{isLogin}}</p>
-			</div>
+			</div> -->
 			<div class="buttomDiv">
-				<Button type="primary" class="loginButton" style="margin-right:20px" @click="showLoginModal">Login</Button>
+				<Button type="success" class="loginButton" @click="showLoginModal">Login</Button>
 				<Button type="primary" class="loginButton" @click="showRegisterModal">Register</Button>
 			</div>
 		</div>
 
 		<div class = "contant">
-			<div
-				v-for = "post in blogList"
-				>
-				<thumbnail 
-					v-bind:title=post.title
-					v-bind:content=post.content
-				></thumbnail>
+			<div class="contentLeft">
+				<div class="carouselDiv">
+					<Carousel class="carousel" autoplay v-model="value2" :autoplay-speed="2500" loop>
+						<CarouselItem>
+							<div class="demo-carousel">1</div>
+						</CarouselItem>
+						<CarouselItem>
+							<div class="demo-carousel">2</div>
+						</CarouselItem>
+						<CarouselItem>
+							<div class="demo-carousel">3</div>
+						</CarouselItem>
+						<CarouselItem>
+							<div class="demo-carousel">4</div>
+						</CarouselItem>
+					</Carousel>
+				</div>
+				<div
+					v-for = "post in blogList"
+					>
+					<thumbnail 
+						v-bind:title=post.title
+						v-bind:content=post.content
+					></thumbnail>
+				</div>
 			</div>
+			<div class="contentRight"></div>
 			<!-- <Button type="primary" class="navigator" @click="navigator">navigater</Button> -->
 		</div>
 
@@ -53,6 +72,7 @@
 				password:'',
 				tempLoginStatus:'No Login',
 				blogList:'',
+				value2:0,
 			}
 		},
 		components:{
@@ -163,23 +183,28 @@
 </script>
 
 <style scoped>
-	.navigator {
-		position: absolute;
-		top: 70px;
-		left: 30px;
-		width: 80px;
+	* {
+		border: 0.05px solid rgb(200,200,200);
+	}
+	.temp{
+		height: 100%;
+
 	}
 	.super {
 		width: 100%;
 		height: 100%;
-		/*background-color: blue;*/
+		background-color: rgb(252,252,252);
 	}
 	.header{
 		position: absolute;
 		top: 0px;
-		height: 7%;
-		background-color: rgb(238,238,238);
+		height: 4.5%;
+		/*background-color: rgb(238,238,238);*/
+		background-color: #ffff;
 		width: 100%;
+		/*border: 0.1px solid red;*/
+		border-bottom: 0.1px solid #f0f0f0;
+		z-index:1;
 	}
 	.logoDiv{
 		position: absolute;
@@ -188,21 +213,61 @@
 		width: 50px;
 	}
 	.buttomDiv{
+		height: 100%;
+		width: 25%;
+		/*font-size: 7px;*/
 		float: right;
-		margin-right: 20px;
-		margin-top: 10px;
+		/*margin-right: 20px;*/
+		/*margin-top: 10px;*/
+		/*background-color: red;*/
 	}
 	.loginButton{
-		width: 120px;
+		position: relative;
+		top: 22.5%;
+		width: 30%;
+		height: 55%;
+		margin-left: 10%;
+		/*size: 10px;*/
 	}
 	.contant{
-		background-color: rgb(250,250,250);
-		width: 72%;
+		background-color: rgb(255,255,255);
+		width: 60%;
 		height: 93%;
 		position: absolute;
-		left: 14%;
-		top: 7%;
-		padding-top: 20px;
-		padding-left: 10%;
+		left: 20%;
+		top: 4.5%;
+		/*border: 0.05px solid rgb(200,200,200);*/
+		/*padding-top: 20px;*/
+		/*padding-left: 10%;*/
+	}
+	.contentLeft{
+		width: 70%;
+		height: 100%;
+		background-color: rgb(255,255,255);
+		/*display: inline;*/
+		float: left;
+	}
+	.contentRight{
+		width: 30%;
+		height: 100%;
+		border: 0.05px solid rgb(200,200,200);
+		/*display: inline-block;*/
+		float: left;
+	}
+	.carouselDiv{
+		/*height: 100%;*/
+		width: 100%;
+		padding: 10px;
+	}
+	.carousel{
+		height: 200px;
+		width: 100%;
+		background-color: rgb(80,107,158);
+	}
+	.navigator {
+		position: absolute;
+		top: 70px;
+		left: 30px;
+		width: 80px;
 	}
 </style>
