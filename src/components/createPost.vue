@@ -1,17 +1,16 @@
 <template>
 	<div class="super">
-		<div class="title">
-			
+		<div class="titleDiv">
+			<Input id="title" v-model="title" placeholder="Enter something..."/>
+			<Button id="submit" @click="submit">Submit</Button>
 		</div>
 		<div id="editor">
-			<textarea :value="input" @input="update"></textarea>
+			<textarea :value="content" @input="update"></textarea>
 			<div v-html="compiledMarkdown"></div>
 		</div>
 	</div>
 </template>
 
-<!-- <script src="https://unpkg.com/marked@0.3.6"></script> -->
-<!-- <script src="https://unpkg.com/lodash@4.16.0"></script> -->
 <script>
 	import axios from 'axios'
 	import marked from 'marked'
@@ -20,18 +19,34 @@
 		name: '',
 		data:function(){
 			return {
-				input: '# hello'
+				content: '# hello',
+				title:'',
 			}
 		},
 		computed: {
 			compiledMarkdown: function () {
-				return marked(this.input, { sanitize: true })
+				return marked(this.content, { sanitize: true })
 			}
 		},
 		methods:{
 			update: _.debounce(function (e) {
-			this.input = e.target.value
-			}, 300)
+			this.content = e.target.value
+			}, 300),
+			submit:function(){
+				console.log(this.content)
+				console.log(this.title)
+				axios.post('http://127.0.0.1:5000/creatpost',{
+							title:this.title,
+							content:this.content,
+						})
+					.then(function(response){
+						console.log(response)
+					})
+					.catch(function(error){
+						console.log(error);
+					})
+			},
+
 		},
 	}
 </script>
@@ -40,6 +55,17 @@
 	.super{
 		width: 100%;
 		height: 100%;
+	}
+	.titleDiv{
+		/*height: 5%;*/
+	}
+	#title{
+		/*display: inline-block;*/
+		width: 85%;
+		/*height: 5%;*/
+	}
+	#submit{
+		width: 15%;
 	}
 	html, body, #editor {
 		margin: 0;

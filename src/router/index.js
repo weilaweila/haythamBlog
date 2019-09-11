@@ -30,8 +30,8 @@ export default new Router({
 			component:createPost,
 			name:'createpost',
 			meta:{
-				isLogin:false
+				isLogin:true
 			}
-		}
+		},
 	]
 })

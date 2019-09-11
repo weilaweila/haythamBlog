@@ -7,6 +7,7 @@
 			<div class="buttomDiv">
 				<Button type="success" class="loginButton" @click="showLoginModal">Login</Button>
 				<Button type="primary" class="loginButton" @click="showRegisterModal">Register</Button>
+				<!-- <Button type="primary" class="navigator" @click="navigator">navigater</Button> -->
 			</div>
 		</div>
 
@@ -38,7 +39,7 @@
 				</div>
 			</div>
 			<div class="contentRight"></div>
-			<!-- <Button type="primary" class="navigator" @click="navigator">navigater</Button> -->
+			
 		</div>
 
 		<Modal v-model="registerModalStatus" @on-ok="registerEvent">
@@ -160,6 +161,8 @@
 						console.log(response)
 						let token = response.data
 						_this.changeLogin({Authorization: token})
+						// setTimeout(_this.navigator(),500)
+						setTimeout(function(){_this.$router.push("/createpost")},100)
 						// if(response.status != 200){
 						// 	// this.$Message.error(response.data)
 						// }
@@ -177,18 +180,19 @@
 			},
 			navigator:function(){
 				this.$router.push("/article")
+				// this.$router.push("/createpost")
 			},
+
 		},
 	}
 </script>
 
 <style scoped>
-	* {
+/*	* {
 		border: 0.05px solid rgb(200,200,200);
-	}
+	}*/
 	.temp{
 		height: 100%;
-
 	}
 	.super {
 		width: 100%;
@@ -198,7 +202,7 @@
 	.header{
 		position: absolute;
 		top: 0px;
-		height: 4.5%;
+		height: 6%;
 		/*background-color: rgb(238,238,238);*/
 		background-color: #ffff;
 		width: 100%;
@@ -231,11 +235,11 @@
 	}
 	.contant{
 		background-color: rgb(255,255,255);
-		width: 60%;
-		height: 93%;
+		width: 44%;
+		height: 94%;
 		position: absolute;
-		left: 20%;
-		top: 4.5%;
+		left: 28%;
+		top: 6%;
 		/*border: 0.05px solid rgb(200,200,200);*/
 		/*padding-top: 20px;*/
 		/*padding-left: 10%;*/
@@ -250,7 +254,7 @@
 	.contentRight{
 		width: 30%;
 		height: 100%;
-		border: 0.05px solid rgb(200,200,200);
+		/*border: 0.05px solid rgb(200,200,200);*/
 		/*display: inline-block;*/
 		float: left;
 	}

@@ -27,9 +27,9 @@
 </script>
 
 <style scoped>	
-	* {
+/*	* {
 		border: 0.05px solid rgb(200,200,200);
-	}
+	}*/
 	.super{
 		width: 100%;
 		height: 100%;
