@@ -1,17 +1,14 @@
 <template>
 	<div class="super">
-		<div class="header">
-<!-- 			<div class="logoDiv">
-				<p>{{count}}, {{isLogin}}</p>
-			</div> -->
-			<div class="buttomDiv">
-				<Button type="success" class="loginButton" @click="showLoginModal">Login</Button>
-				<Button type="primary" class="loginButton" @click="showRegisterModal">Register</Button>
-				<!-- <Button type="primary" class="navigator" @click="navigator">navigater</Button> -->
-			</div>
-		</div>
 
-		<div class = "contant">
+				<!-- <Button type="success" class="loginButton" @click="showLoginModal">Login</Button> -->
+				<!-- <Button type="primary" class="loginButton" @click="showRegisterModal">Register</Button> -->
+				<!-- <Button type="primary" class="navigator" @click="navigator">navigater</Button> -->
+			<!-- </div> -->
+		<!-- </div> -->
+		<Header></Header>
+
+		<div class = "content">
 			<div class="contentLeft">
 				<div class="carouselDiv">
 					<Carousel class="carousel" autoplay v-model="value2" :autoplay-speed="2500" loop>
@@ -31,6 +28,7 @@
 				</div>
 				<div
 					v-for = "post in blogList"
+					@click = 'openpostDetail(post.id)'
 					>
 					<thumbnail 
 						v-bind:title=post.title
@@ -61,7 +59,8 @@
 	import axios from 'axios'
 	import {mapActions,mapState,mapMutations} from 'vuex'
 	import store from '../store'
-	import thumbnail from './articleThumbnail.vue'
+	import thumbnail from './postThumbnail.vue'
+	import Header from './header.vue'
 
 	export default{
 		name: 'home',
@@ -78,6 +77,7 @@
 		},
 		components:{
 			thumbnail:thumbnail,
+			Header:Header,
 		},
 		computed:{
 			...mapState([
@@ -96,17 +96,17 @@
 		created(){
 			localStorage.removeItem("Authorization","")
 		// 	this.incrementStep();
-		let _this = this
+			let _this = this
 			axios.get('http://127.0.0.1:5000/postlist')
-					.then(function(response){
-						// console.log(_this.blogList)
-						console.log(response.data)
-						_this.blogList = response.data.posts
-						console.log(_this.blogList)
-					})
-					.catch(function(error){
-						console.log(error)
-					})
+				.then(function(response){
+					// console.log(_this.blogList)
+					console.log(response.data)
+					_this.blogList = response.data.posts
+					console.log(_this.blogList)
+				})
+				.catch(function(error){
+					console.log(error)
+				})
 			
 		},
 		mounted(){
@@ -176,21 +176,25 @@
 						alert('账号或密码错误');
 						console.log(error);
 					})
-					// this.$router.push("article")
+					// this.$router.push("post")
 			},
 			navigator:function(){
-				this.$router.push("/article")
+				this.$router.push("/post")
 				// this.$router.push("/createpost")
 			},
-
+			openpostDetail:function(postId){
+				// console.log("here is open post: ",postId)
+				var path = '/post/' + postId
+				this.$router.push(path)
+			}
 		},
 	}
 </script>
 
 <style scoped>
-/*	* {
+	* {
 		border: 0.05px solid rgb(200,200,200);
-	}*/
+	}
 	.temp{
 		height: 100%;
 	}
@@ -233,7 +237,7 @@
 		margin-left: 10%;
 		/*size: 10px;*/
 	}
-	.contant{
+	.content{
 		background-color: rgb(255,255,255);
 		width: 44%;
 		height: 94%;
@@ -267,6 +271,10 @@
 		height: 200px;
 		width: 100%;
 		background-color: rgb(80,107,158);
+	}
+	.demo-carousel{
+		height: 200px;
+		width: 100%;
 	}
 	.navigator {
 		position: absolute;

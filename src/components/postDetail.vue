@@ -15,13 +15,17 @@
 	import Header from './header.vue'
 
 	export default{
-		name: 'articleDetail',
+		name: 'postDetail',
 		data:function(){
 			return {
-				article:'default',
+				post:'default',
 				title:'',
 				content:'',
 			}
+		},
+		props:{
+			// title:String,
+			// content:String,
 		},
 		components:{
 			Header:Header,
@@ -38,22 +42,33 @@
 
 		},
 		created:function(){
-			var that = this
+			var _this = this
+			console.log("here is post detail: ",this.$route.params.id)
 			// var temp = ''
 
-			// axios.get('http://127.0.0.1:5000/article')
-			// 	.then(function(res){
-			// 		that.article = res.data
-			// 	})
-			// 	.catch(function(error){
+			axios.get('http://127.0.0.1:5000/getpost',{
+				params:{
+					id: _this.$route.params.id
+				}
+			})
+			.then(function(res){
+				// that.post = res.data
+				console.log(res.data)
+				_this.title = res.data.title
+				_this.content = res.data.content
+			})
+			.catch(function(error){
 
-			// 	})
-			// this.article = temp
+			})
+			// this.post = temp
 		}
 	}
 </script>
 
 <style scoped>	
+	* {
+		border: 0.05px solid rgb(200,200,200);
+	}
 	.super{
 		width: 100%;
 		height: 100%;
@@ -76,6 +91,7 @@
 		font-size: 20px;
 		padding-left: 20px;
 		padding-top: 5px;
+		text-align: center;
 	}
 	.titleContent{
 		/*background-color: blue;*/
@@ -84,5 +100,6 @@
 		width: 100%;
 		height: 94.5%;
 		top:5.5%;
+		padding: 10px;
 	}
 </style>

@@ -20,7 +20,6 @@ router.afterEach(route=>{
 	window.scroll(0,0);
 })
 
-
 router.beforeEach((to,from,next)=>{
 	// let getFlag = localStorage.getItem("Flag");
 	let token = localStorage.getItem('Authorization');

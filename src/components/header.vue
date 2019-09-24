@@ -1,9 +1,10 @@
 <template>
 	<div class="super">
 		<div class="header">
-<!-- 			<div class="logoDiv">
-				<p>{{count}}, {{isLogin}}</p>
-			</div> -->
+			<div class="logoDiv">
+				<!-- <p>{{count}}, {{isLogin}}</p> -->
+				<router-link to='/'>Haytham's Blog</router-link>
+			</div>
 			<div class="buttomDiv">
 				<Button type="success" class="loginButton" >Login</Button>
 				<Button type="primary" class="loginButton" >Register</Button>
@@ -49,8 +50,9 @@
 	.logoDiv{
 		position: absolute;
 		left: 30px;
-		top: 15px;
-		width: 50px;
+		top: 10px;
+		width: 150px;
+		font-size: 1.5em;
 	}
 	.buttomDiv{
 		height: 100%;
